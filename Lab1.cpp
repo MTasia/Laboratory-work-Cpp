@@ -22,18 +22,13 @@ int main(int argc, char* argv[]) {
 	string line;
 	vector<string> words;
 	vector<string> strings;
-	int j = 0;
 	while (getline(in, line)) {
 		stringstream sline;
 		sline << line;
 		copy(istream_iterator<string>(sline), istream_iterator<string>(), inserter(words, words.end()));
 		string new_str = "";
 		while (words.size() > 0) {
-			if (new_str.size() + words[0].size() + 1 < max_size) {
-				new_str.append(words[0] + " ");
-				words.erase(words.begin());
-			}
-			else if (new_str.size() + words[0].size() <= max_size) {
+			if (new_str.size() + words[0].size() <= max_size) {
 				if (new_str.size() + words[0].size() == max_size)
 					new_str.append(words[0]);
 				else
