@@ -68,6 +68,7 @@ void print_strings(vector<string>& strings, int max_size, const char* output_fil
 		fout << center(i, max_size) << endl;
 }
 
+
 string center(string str, int max_size) {
 	string new_str = "";
 	int k = (max_size - str.size()) / 2;
