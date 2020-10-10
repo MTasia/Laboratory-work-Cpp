@@ -89,6 +89,25 @@ public:
 		return 0;
 	}
 
+	void DrawLine(Line& line) {
+		glColor3f(1.0f, 1.0f, 1.0f);
+		glLineWidth(3);
+		glBegin(GL_LINES);
+		glVertex2d(p1.Getx(), p1.Gety());
+		glVertex2d(p1.Getx(), p2.Gety());
+		glEnd();
+	}
+
+	void DrawTrace(Line& line, Line& speed) {
+		glColor3f(1.0f / 2, 1.0f / 2, 1.0f / 2);
+		glBegin(GL_POLYGON);
+		glVertex2d(p1.Getx(), p1.Gety());
+		glVertex2d(p2.Getx(), p2.Gety());
+		glVertex2d(line.p2.Getx() - 5 * speed.p2.Getx(), line.p2.Gety() - 5 * speed.p2.Gety());
+		glVertex2d(line.p1.Getx() - 5 * speed.p1.Getx(), line.p1.Gety() - 5 * speed.p1.Gety());
+		glEnd();
+	}
+
 	Line& operator += (Line rv) {
 		p1 += rv.p1;
 		p2 += rv.p2;
@@ -127,33 +146,14 @@ void Borders() {
 	glEnd();
 }
 
-void DrawLine(Line& line) {
-	glColor3f(1.0f, 1.0f, 1.0f);
-	glLineWidth(3);
-	glBegin(GL_LINES);
-	glVertex2d(line.GetP1().Getx(), line.GetP1().Gety());
-	glVertex2d(line.GetP2().Getx(), line.GetP2().Gety());
-	glEnd();
-}
-
-void DrawTrace(Line& line, Line& speed) {
-	glColor3f(1.0f / 2, 1.0f / 2, 1.0f / 2);
-	glBegin(GL_POLYGON);
-	glVertex2d(line.GetP1().Getx(), line.GetP1().Gety());
-	glVertex2d(line.GetP2().Getx(), line.GetP2().Gety());
-	glVertex2d(line.GetP2().Getx() - 5 * speed.GetP2().Getx(), line.GetP2().Gety() - 5 * speed.GetP2().Gety());
-	glVertex2d(line.GetP1().Getx() - 5 * speed.GetP2().Getx(), line.GetP1().Gety() - 5 * speed.GetP1().Gety());
-	glEnd();
-}
-
 void renderScene(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 	gluLookAt(0.0f, 0.0f, 10.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 
 	Borders();
-	DrawLine(line);
-	DrawTrace(line, speed);
+	line.DrawLine(line);
+	line.DrawTrace(line, speed);
 
 	line = speed;
 
