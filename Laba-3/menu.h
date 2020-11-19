@@ -32,8 +32,6 @@ private:
 
 
 public:
-	menu() : tree() {}
-
 	menu(std::string& S) : tree(S) {
 		if (S.find('<') != string::npos) {
 			this->action = &menu::start_dialogue;
