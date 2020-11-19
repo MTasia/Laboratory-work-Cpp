@@ -32,6 +32,7 @@ private:
 
 
 public:
+	menu() {}
 	menu(std::string& S) : tree(S) {
 		if (S.find('<') != string::npos) {
 			this->action = &menu::start_dialogue;
@@ -63,6 +64,7 @@ private:
 	string first_brackets(string& s, char del1, char del2);  
 
 public:
+	text_tree() {}
 	text_tree(string& init) { str = init; }
 
 	menu* create_tree() { return create_tree(str); } 
