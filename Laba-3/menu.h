@@ -63,7 +63,6 @@ private:
 	string first_brackets(string& s, char del1, char del2);  
 
 public:
-	text_tree() { str = string(); }
 	text_tree(string& init) { str = init; }
 
 	menu* create_tree() { return create_tree(str); } 
