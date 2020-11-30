@@ -104,13 +104,13 @@ string text_tree::first_brackets(string& s, char del1, char del2) {
 void menu::init_buttons(float w, float h) {
 	float step = h / children.size() / 2;
 	for (int i = 0; i < children.size(); i++) {
-		static_cast<menu*>(this->children[i])->button[0] = point(-w / 8, step * i - h / 4);
-		static_cast<menu*>(this->children[i])->button[1] = point(w / 8, step * (i + 1) - h / 4);
+		((menu*)(this->children[i]))->button[0] = point(-w / 8, step * i - h / 4);
+		((menu*)(this->children[i]))->button[1] = point(w / 8, step * (i + 1) - h / 4);
 	}
 }
 
 void menu::draw_name(menu* ptr) {
-	point p1 = (static_cast<menu*>(ptr)->button[0] + static_cast<menu*>(ptr)->button[1]);
+	point p1 = (ptr->button[0] + ptr->button[1]);
 	p1 = p1 / 2;
 	p1.set_name_pos();
 	string name = ptr->get_data();
@@ -159,10 +159,9 @@ bool menu :: between(point p, menu* i) {
 void menu::click(point p) {
 	for (auto i = first_child(); i != NULL; i = next_child()) {
 		if (between(p, (menu*)i)) {
-			*this = *(static_cast<menu*>(i));
+			*this = *((menu*)i);
 			(this->*action)();
 			return;
 		}
 	}
 }
-
