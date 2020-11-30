@@ -26,7 +26,7 @@ private:
 
 	void pass() { return; }  
 
-	void init_buttons(float w, float h);  
+	void init_buttons(float w, float h); 
 
 	void draw_name(menu* ptr);
 
@@ -45,8 +45,11 @@ public:
 
 	void draw_children(float width, float height);  
 
-	void click(point p); 
+	void click(point p);
 
+	void draw_name(menu* ptr);
+
+	bool between(point p, menu* m);
 };
 
 class text_tree {
@@ -71,4 +74,3 @@ public:
 };
 
 #endif 
-
