@@ -145,16 +145,24 @@ void menu::start_dialogue() {
 void menu::draw_children(float width, float height) {
 	init_buttons(width, height);
 	for (auto i = first_child(); i != NULL; i = next_child()) {
-		draw_name(static_cast<menu*>(i));
+		draw_name((menu*)i);
 	}
+}
+
+bool menu :: between(point p, menu* i) {
+	if (p.between(i->button[0], i->button[1])) {
+		return true;
+	}
+	return false;
 }
 
 void menu::click(point p) {
 	for (auto i = first_child(); i != NULL; i = next_child()) {
-		if (p.between(static_cast<menu*>(i)->button[0], static_cast<menu*>(i)->button[1])) {
+		if (between(p, (menu*)i)) {
 			*this = *(static_cast<menu*>(i));
 			(this->*action)();
 			return;
 		}
 	}
 }
+
